@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "signup",
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "tslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "tslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "projects": {
+    "signup": {
+      "projectType": "application",
+      "root": "apps/signup",
+      "sourceRoot": "apps/signup/src",
+      "prefix": "shield",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/signup",
+            "index": "apps/signup/src/index.html",
+            "main": "apps/signup/src/main.ts",
+            "polyfills": "apps/signup/src/polyfills.ts",
+            "tsConfig": "apps/signup/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/signup/src/favicon.ico", "apps/signup/src/assets"],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "apps/signup/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/signup/src/environments/environment.ts",
+                  "with": "apps/signup/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "signup:build",
+            "proxyConfig": "apps/signup/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "signup:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "signup:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/signup/tsconfig.app.json",
+              "apps/signup/tsconfig.spec.json",
+              "apps/signup/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/signup/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/signup"],
+          "options": {
+            "jestConfig": "apps/signup/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "signup-e2e": {
+      "root": "apps/signup-e2e",
+      "sourceRoot": "apps/signup-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/signup-e2e/cypress.json",
+            "tsConfig": "apps/signup-e2e/tsconfig.e2e.json",
+            "devServerTarget": "signup:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "signup:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/signup-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/signup-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/tsconfig.app.json",
+              "apps/api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api"],
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "data": {
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data/tsconfig.lib.json",
+              "libs/data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data"],
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "prefix": "shield",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/tsconfig.lib.json",
+              "libs/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui"],
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}

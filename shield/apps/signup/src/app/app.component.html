@@ -1,0 +1,62 @@
+<h1>Register</h1>
+
+
+<shield-user [user]="user"></shield-user>
+
+<form [formGroup]="signupForm" (ngSubmit)="addUser()">
+  <div class="container">
+      <div>
+          <input  placeholder="First Name" formControlName="firstName">
+          <div *ngIf="signupForm.get('firstName').errors">First name is required</div>
+      </div>
+
+      <div>
+          <input  placeholder="LastName" formControlName="lastName">
+          <div *ngIf="signupForm.get('lastName').errors">Last name is required</div>
+      </div>
+
+      <div>
+          <input  placeholder="Email" formControlName="email">
+          <div *ngIf="signupForm.get('email').errors">Email is required</div>
+      </div>
+
+
+
+      <button mat-flat-button color="primary" [disabled]="!signupForm.valid" type="submit">Register</button>
+  </div>
+</form>
+
+
+<!-- <form nz-form [formGroup]="signupForm" (ngSubmit)="addUser()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstName" nzRequired nzTooltipTitle="First Name">
+      <span>First Name</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your First name!">
+      <input nz-input id="firstName" formControlName="firstName" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired nzTooltipTitle="First Name">
+      <span>LastName</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Last name!">
+      <input nz-input id="lastName" formControlName="lastName" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary">Register</button>
+    </nz-form-control>
+  </nz-form-item>
+</form> -->

@@ -1,0 +1,21 @@
+{
+  "implicitDependencies": {
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    ".eslintrc.json": "*"
+  },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "shield",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+    }
+  },
+  "projects": {
+    "signup": { "tags": [] },
+    "signup-e2e": { "tags": [], "implicitDependencies": ["signup"] },
+    "api": { "tags": [] },
+    "data": { "tags": [] },
+    "ui": { "tags": [] }
+  }
+}
