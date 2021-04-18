@@ -13,6 +13,7 @@ export class AppController {
 
   @Post('addUser')
   addUser(@Body() firstName: {firstName: string}, @Body() lastName: {lastName:string }, @Body() email: {email: string}) {
+
      return this.appService.addUser( firstName.firstName, lastName.lastName, email.email );
   }
 }

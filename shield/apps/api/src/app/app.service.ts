@@ -13,5 +13,8 @@ export class AppService {
 
   addUser(firstName: string, lastName: string, email: string) {
     this.user.push({firstName: firstName, lastName: lastName, email: email})
+
+    return {firstName};
   }
+
 }

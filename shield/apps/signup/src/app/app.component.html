@@ -1,33 +1,11 @@
 <h1>Register</h1>
 
 
-<shield-user [user]="user"></shield-user>
-
-<form [formGroup]="signupForm" (ngSubmit)="addUser()">
-  <div class="container">
-      <div>
-          <input  placeholder="First Name" formControlName="firstName">
-          <div *ngIf="signupForm.get('firstName').errors">First name is required</div>
-      </div>
-
-      <div>
-          <input  placeholder="LastName" formControlName="lastName">
-          <div *ngIf="signupForm.get('lastName').errors">Last name is required</div>
-      </div>
-
-      <div>
-          <input  placeholder="Email" formControlName="email">
-          <div *ngIf="signupForm.get('email').errors">Email is required</div>
-      </div>
+<!-- <shield-user [user]="user"></shield-user> -->
 
 
 
-      <button mat-flat-button color="primary" [disabled]="!signupForm.valid" type="submit">Register</button>
-  </div>
-</form>
-
-
-<!-- <form nz-form [formGroup]="signupForm" (ngSubmit)="addUser()">
+<form nz-form [formGroup]="signupForm" (ngSubmit)="addUser()" *ngIf="showForm">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -59,4 +37,21 @@
       <button nz-button nzType="primary">Register</button>
     </nz-form-control>
   </nz-form-item>
-</form> -->
+</form>
+
+<div class="row" *ngIf="showMsg">
+  <div class="col-xs-12">
+    <div class="alert alert-success">
+      <strong>Hey, {{data.firstName}}!</strong>
+      <p>Thank you for signing up!</p>
+      <a>Go back</a>
+
+    </div>
+  </div>
+</div>
+
+<nz-switch [(ngModel)]="show"></nz-switch>
+<nz-list *ngIf="show" nzBordered nzSize="small">
+  <nz-list-item *ngFor="let t of user" class="user">{{t.firstName}} {{t.lastName}} {{t.email}}</nz-list-item>
+
+</nz-list>

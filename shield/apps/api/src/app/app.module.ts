@@ -5,19 +5,11 @@ import { AppService } from './app.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NzFormModule } from 'ng-zorro-antd/form';
-
-
-
-
-
-
-
+import { NgModule } from '@angular/core';
 
 
 @Module({
-  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, BrowserModule, NgModule, NzFormModule,  ],
+  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, BrowserModule, NgModule  ],
 
   controllers: [AppController],
   providers: [AppService],
