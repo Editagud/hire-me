@@ -37,3 +37,7 @@ If you have any questions feel free to reach out to jobs@shieldapp.ai ☺️
 
 ![image](https://user-images.githubusercontent.com/16419971/114539208-8ce5fa00-9c54-11eb-81bd-70387184cd2d.png)
 
+
+
+### Description
+As it was the first Angular & Nestjs app, the most attenction was for functionality and learning but not design ✌️

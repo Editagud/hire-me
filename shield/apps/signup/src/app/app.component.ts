@@ -28,6 +28,7 @@ export class AppComponent {
   showForm: boolean = true;
   data = {};
 
+
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
       firstName: [null, [Validators.required]],
@@ -41,26 +42,36 @@ export class AppComponent {
 
     })
   }
+ switchSuccessMsg(){
+  this.showMsg = !this.showMsg;
+  this.showForm = !this.showForm ;
+  }
   addUser() {
+     for (const i in this.signupForm.controls) {
+      this.signupForm.controls[i].markAsDirty();
+      this.signupForm.controls[i].updateValueAndValidity();
+    }
+    if(this.signupForm.status === "VALID"){
+      const formData = this.signupForm.value;
 
-    const formData = this.signupForm.value;
-
-    this.http.post('/api/addUser', formData).subscribe(data => {
+      this.http.post('/api/addUser', formData).subscribe(data => {
 
 
 
-      console.log(data)
-      this.fetch();
-      this.showMsg = true;
-      this.showForm = false;
+        console.log(data)
+        this.fetch();
+        this.switchSuccessMsg();
 
-      this.data = data;
+        this.data = data;
 
-      error => {
-        console.log(error)
-      }
+        error => {
+          console.log(error)
+        }
 
-    });
+      });
+    }
+
+
   }
 
 }

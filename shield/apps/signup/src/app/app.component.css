@@ -131,3 +131,35 @@ summary {
   width: 16px;
   margin-right: 4px;
 }
+.alert-success {
+  text-align: center;
+}
+.switch-container{
+  display: flex;
+}
+.switch-container .switcher{
+margin-left: 1em;
+}
+input{width: 100%}
+
+.register-area{
+  text-align: center;
+}
+.go-back-button{
+
+}
+.ant-btn-primary{
+  background-color: #e26d5a;
+  border-color: #e26d5a;
+}
+.go-back-button{
+  color: #e26d5a;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.switcher .ant-switch-checked{
+  background-color: #e26d5a !important ;
+}
+.name{
+  color: #e26d5a
+}

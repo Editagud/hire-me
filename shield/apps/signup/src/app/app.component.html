@@ -1,9 +1,7 @@
-<h1>Register</h1>
+<h1>Sign up</h1>
 
 
 <!-- <shield-user [user]="user"></shield-user> -->
-
-
 
 <form nz-form [formGroup]="signupForm" (ngSubmit)="addUser()" *ngIf="showForm">
   <nz-form-item>
@@ -42,15 +40,15 @@
 <div class="row" *ngIf="showMsg">
   <div class="col-xs-12">
     <div class="alert alert-success">
-      <strong>Hey, {{data.firstName}}!</strong>
+      <strong>Hey, <span class="name">{{data.firstName}}</span>! 👋</strong>
       <p>Thank you for signing up!</p>
-      <a>Go back</a>
+      <div class="go-back-button" (click)="switchSuccessMsg()">Go back</div>
 
     </div>
   </div>
 </div>
 
-<nz-switch [(ngModel)]="show"></nz-switch>
+<div class="switch-container"><p>Show all users </p><nz-switch class="switcher" [(ngModel)]="show"></nz-switch></div>
 <nz-list *ngIf="show" nzBordered nzSize="small">
   <nz-list-item *ngFor="let t of user" class="user">{{t.firstName}} {{t.lastName}} {{t.email}}</nz-list-item>
 
